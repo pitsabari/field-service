@@ -70,10 +70,6 @@ class FSMOrder(models.Model):
     def action_complete(self):
         for order in self:
             order.account_stage = "review"
-        if self.person_id.supplier_rank and not self.contractor_cost_ids:
-            raise ValidationError(
-                _("Cannot move to Complete " + "until 'Contractor Costs' is filled in")
-            )
         if not self.person_id.supplier_rank and not self.employee_timesheet_ids:
             raise ValidationError(
                 _(
