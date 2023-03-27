@@ -48,10 +48,7 @@ class FSMOrder(models.Model):
         for activity_id in self.order_activity_ids:
             if activity_id.required and activity_id.state == "todo":
                 raise ValidationError(
-                    _(
-                        "You must complete activity '%s' before \
-                    completing this order."
-                    )
+                    _("You must complete activity '%s' before completing this order.")
                     % activity_id.name
                 )
         self.activity_ids.action_done()
